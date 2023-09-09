@@ -1,2 +1,2 @@
 # INF1002-Lab
-Lab codes
+# Lab 1 (Average calculator, weekly payment calculator, bmi calculator)
