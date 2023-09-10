@@ -2,55 +2,36 @@ import sys
 n = len(sys.argv)
 
 try:
-    if sys.argv[1] == 'abc':
-        raise IndexError("Your input is invalid!")
-
+    type = sys.argv[1]
+    height = sys.argv[2]
+    weight = sys.argv[3]
 except (IndexError, ValueError):
     print("Your input is invalid!")
 
-units = str(sys.argv[1])
-height = float(sys.argv[2])
-weight = float(sys.argv[3])
-
-if units == 'metric':
-    bmi = weight / (height ** 2)
-
-    if bmi < 16:
-        print("{:.2f}\tSevere Thinness".format(bmi))
-    elif 16 <= bmi < 16.9:
-        print("{:.2f}\tModerate Thinness".format(bmi))
-    elif 17 <= bmi < 18.4:
-        print("{:.2f}\tMild Thinness".format(bmi))
-    elif 18.5 <= bmi <= 24.9:
-        print("{:.2f}\tNormal".format(bmi))
-    elif 25 < bmi < 29.9:
-        print("{:.2f}\tOverweight".format(bmi))
-    elif 30 <= bmi < 34.9:
-        print("{:.2f}\tObese Class I".format(bmi))
-    elif 35 <= bmi < 39.9:
-        print("{:.2f})\tObese Class II".format(bmi))
-    else:
-        print("{:.2f}\tObese Class III".format(bmi))
-
-elif units == 'imperial':
-    bmi = (703 * weight) / (height ** 2)
-
-    if bmi < 16:
-        print("{:.2f}\tSevere Thinness".format(bmi))
-    elif 16 <= bmi < 16.9:
-        print("{:.2f}\tModerate Thinness".format(bmi))
-    elif 17 <= bmi < 18.4:
-        print("{:.2f}\tMild Thinness".format(bmi))
-    elif 18.5 <= bmi <= 24.9:
-        print("{:.2f}\tNormal".format(bmi))
-    elif 25 <= bmi < 29.9:
-        print("{:.2f}\tOverweight".format(bmi))
-    elif 30 <= bmi < 34.9:
-        print("{:.2f}\tObese Class I".format(bmi))
-    elif 35 <= bmi < 39.9:
-        print("{:.2f})\tObese Class II".format(bmi))
-    else:
-        print("{:.2f}\tObese Class III".format(bmi))
-
 else:
-    print("Your input is invalid!")
+    height = float(height)
+    weight = float(weight)
+    bmi = 0
+    category = ""
+    if type == "metric":
+        bmi = weight/(height**2)
+    elif type == "imperial":
+        bmi = (703*weight)/(height**2)
+    if bmi <= 16:
+        category = "Severe Thinness"
+    elif bmi <= 17:
+        category = "Moderate Thinness"
+    elif bmi <= 18.5:
+        category = "Mild Thinness"
+    elif bmi <= 25:
+        category = "Normal"
+    elif bmi <= 30:
+        category = "Overweight"
+    elif bmi <= 35:
+        category = "Obese Class I"
+    elif bmi <= 40:
+        category = "Obese Class II"
+    else:
+        category = "Obese Class III"
+
+    print("%0.2f"%bmi+"\t"+category)
