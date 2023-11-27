@@ -1,34 +1,55 @@
 import sys
 
+# checking if there are any values added into the argv, if not,return invalid inpt and exit
 if len(sys.argv) < 2:
-    print("Your input is invalid!")
+    print("Please enter valid integers.")
     sys.exit(1)
 
-enter = sys.argv[1]  # fit argument as one input
-enter = enter.lower()  # convert to all lower case
-letters_dict = {}  # to store letter count
+# for users to input as a list of integers
+enter = sys.argv[1]
+# split user input with a comma
+enter = enter.split(',')
+# checking if the input is a number/integer
+for i in range(len(enter)):
+    if enter[i].isdigit():
+        enter[i] = int(enter[i])
+    else:
+        print("Please enter valid integers.")
+        exit()
 
-# To loop characters for storage
-for letters in enter:
-    if letters not in letters_dict:
-        letters_dict[letters] = 1
-    else:  # Check if letter is in dictionary
-        letters_dict[letters] += 1  # increment of letter count
-letters_dict = dict(sorted(letters_dict.items(), key=lambda x: (-x[1], x[0])))
-#   letters_dict.items : gets all key values pairs items from letter_dict dictionary. returns a list of tuples
-#   dict : convert all sorted list of tuples back into dict
-#   sorted : sorts the list of tuples
-#   key = lambda : defines the sorting key
-#   sort by descending order with -x[1], x[0]
-count = 0
-output = ""
+# sort the input via ascending order
+enter.sort()
 
-for pair, in letters_dict:  # for all letters in dict, add count +1
-    if count < 5:
-        output += f"{pair}:{letters_dict[pair]}"
-# output variable accumulates formatted strings for each "pair" and "count" combination, separated by a comma and space
-# this is often used to build a string that will be printed or displayed as a final output
-        count += 1
-        output += ","
+# Command line, to count even number, odd number and the sum, whilst setting it to count from the front or the back
+even_count = 0
+odd_count = 0
+even_total = 0
+odd_total = 0
+# access the last element in the list, which in this case is the biggest number as we sorted it above
+highest_number = enter[-1]
+# access the first element in the list, which in this case is the lowest number as we sorted it above
+lowest_number = enter[0]
+total_value = 0
+x = highest_number + lowest_number
 
-print(output[:-1])
+for ent in enter:
+    total_value += ent
+    # checking for even number, which is divisible by 2
+    if (ent % 2) == 0:
+        # for all even number, count plus 1
+        even_count += 1
+        # for all even number, add into ent
+        even_total += ent
+    # check for odd number count
+    else:
+        odd_count += 1
+        odd_total += ent
+
+# counting the average with formula
+centered_avg = int((total_value - x) / (len(enter) - 2))
+
+# crafting the output in a single line
+print(f"The sum of all even numbers is {even_total}, the sum of all odd numbers is {odd_total}, "
+      f"the difference between the biggest and smallest number is {highest_number - lowest_number}, the "
+      f"total number of even numbers is {even_count}, the total number of odd numbers is "
+      f"{odd_count}, the centered average is {centered_avg:0.0f}.")
