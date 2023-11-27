@@ -1,3 +1,5 @@
 # INF1002-Lab
-	You may download the "All.zip".py files to access the past weeks lab codes.
- 	Cheers
+# FOR SIT STUDENTS ONLY 
+
+You may download the "All.zip".py files in the respective branches, ignore the ones in main. 
+ Cheers
